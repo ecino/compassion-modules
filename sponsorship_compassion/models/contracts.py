@@ -1082,15 +1082,15 @@ class SponsorshipContract(models.Model):
         """
         invoice_line_obj = self.env["account.move.line"]
         paid_invl = invoice_line_obj.search(
-            [("contract_id", "in", self.ids), ("payment_state", "=", "paid")],
-            order="due_date asc",
+            [("contract_id", "in", self.ids), ("move_id.payment_state", "=", "paid")],
+            order="date_maturity asc",
             limit=1,
         )
         invoice_lines = invoice_line_obj.search(
             [
                 ("contract_id", "in", self.ids),
-                ("payment_state", "=", "not_paid"),
-                ("due_date", "<", paid_invl.due_date),
+                ("move_id.payment_state", "=", "not_paid"),
+                ("move_id.invoice_date_due", "<", paid_invl.due_date),
             ]
         )
 

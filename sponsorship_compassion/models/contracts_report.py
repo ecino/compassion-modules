@@ -212,7 +212,7 @@ class PartnerSponsorshipReport(models.Model):
                 ("partner_id.church_id", "=", self.id),
                 ("move_id.invoice_category", "in", ["gift", "sponsorship", "fund"]),
                 ("move_id.move_type", "=", "out_invoice"),
-                ("payment_state", "=", "paid"),
+                ("move_id.payment_state", "=", "paid"),
                 ("last_payment", "<", self.end_period),
                 ("last_payment", ">=", self.start_period),
             ],

@@ -72,8 +72,8 @@ class GenerateGiftWizard(models.TransientModel):
                 invoice_line_ids = self.env["account.move.line"].search(
                     [
                         ("product_id", "=", self.product_id.id),
-                        ("due_date", ">=", begin_year),
-                        ("due_date", "<=", end_year),
+                        ("move_id.invoice_date_due", ">=", begin_year),
+                        ("move_id.invoice_date_due", "<=", end_year),
                         ("contract_id", "=", contract.id),
                         ("state", "!=", "cancel"),
                     ]
